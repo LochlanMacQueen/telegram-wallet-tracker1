@@ -6,7 +6,7 @@ def telegram_webhook():
     chat_id = message.get("chat", {}).get("id", "")
 
     if text.startswith("/addwallet "):
-        wallet = text.split("/addwallet ")[1].strip()
+        wallet = text[len("/addwallet "):].strip()
         wallets = load_wallets()
         if wallet not in wallets:
             wallets.append(wallet)
@@ -16,7 +16,7 @@ def telegram_webhook():
             send_telegram_message("⚠️ Wallet already tracked.", chat_id)
 
     elif text.startswith("/removewallet "):
-        wallet = text.split("/removewallet ")[1].strip()
+        wallet = text[len("/removewallet "):].strip()
         wallets = load_wallets()
         if wallet in wallets:
             wallets.remove(wallet)
