@@ -38,6 +38,7 @@ def home():
 def helius_webhook():
     data = request.json
     wallets = load_wallets()
+      print("WEBHOOK RECEIVED:", json.dumps(data, indent=2)) #This is what i added <-------------------------
     for tx in data.get("transactions", []):
         if tx.get("type") == "SWAP":
             wallet = tx.get("accountData", {}).get("owner", "")
